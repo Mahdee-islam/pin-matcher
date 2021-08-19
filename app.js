@@ -13,17 +13,33 @@ function generatePin() {
     document.getElementById('display-pin').value = pin;
 }
 
-document.getElementById('keypad').addEventListener('click', function (event) {
+document.getElementById('keypad').addEventListener('click', function () {
     const number = event.target.innerText;
     const calcInput = document.getElementById('typed-numbers');
     if (isNaN(number)) {
         if(number == 'C'){
-            calcInput.value = "";       
+            calcInput.value = "";
         }
-    } else {
-        
+    } 
+    else{
         const previousNumber = calcInput.value;
         const newNumber = previousNumber + number;
         calcInput.value = newNumber;
     }
 })
+
+function verifyPin(){
+    const pin = document.getElementById('display-pin').value;
+    const typedNumbers = document.getElementById('typed-numbers').value;
+    const successMessage = document.getElementById('notify-success');
+    const failedError = document.getElementById('notify-fail');
+
+    if(pin == typedNumbers){
+        failedError.style.display = "none";
+        successMessage.style.display = "block";
+    }
+    else{
+        successMessage.style.display = "none";
+        failedError.style.display = "block";
+    }
+}
